@@ -29,7 +29,7 @@ mongoose.connection.on('error',(err)=>{
 
 
 
-app.get('/',requireToken,(req,res)=>{
+app.get('*',requireToken,(req,res)=>{
     console.log(req.body)
     res.send({'email':req.user.email,'name':req.user.name,'mobile':req.user.mobile})
 })

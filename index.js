@@ -29,11 +29,18 @@ mongoose.connection.on('error',(err)=>{
 
 
 
-app.get('/ss',requireToken,(req,res)=>{
+app.get('/',requireToken,(req,res)=>{
     console.log(req.body)
     res.send({'email':req.user.email,'name':req.user.name,'mobile':req.user.mobile})
 })
 
-app.listen(PORT,()=>{
-    console.log('Server Running  '+PORT);
-})
+app.listen(process.env.PORT || 3000, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
+
+// app.listen(PORT,()=>{
+//     console.log('Server Running  '+PORT);
+// })
+
+
+

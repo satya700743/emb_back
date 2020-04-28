@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         // unique:true,
         required:[true,'Mobile is required'],
+        match: [/^(\+\d{1,3}[- ]?)?\d{10}$/, 'Invalid mobile format'],
         validate: {
         validator: function(v){
             return this.model('User').findOne({ mobile: v }).then(user => !user)

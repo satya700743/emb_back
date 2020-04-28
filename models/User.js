@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     mobile:{
         type:String,
         unique:'Two users cannot share the same mobile ({VALUE})',
-        required:'Mobile is required'
+        required:true
     },
     name:{
         type:String,
@@ -15,7 +15,8 @@ const userSchema = new mongoose.Schema({
     email:{
         type:String,
         required:true,
-        unique:true
+        // unique:true
+        unique:'Two users cannot share the same email ({VALUE})',
     },
     password:{
         required:true,

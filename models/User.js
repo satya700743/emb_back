@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const beautifyUnique = require('mongoose-beautiful-unique-validation');
 
 const userSchema = new mongoose.Schema({
     mobile:{
         type:String,
-        unique:true,
-        required:true
+        unique:'Two users cannot share the same mobile ({VALUE})',
+        required:'Mobile is required'
     },
     name:{
         type:String,
@@ -21,6 +22,9 @@ const userSchema = new mongoose.Schema({
         type:String
     }
 });
+
+userSchema.plugin(beautifyUnique);
+
 
 userSchema.pre('save',function(next){
     const user = this;

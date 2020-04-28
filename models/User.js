@@ -5,20 +5,33 @@ const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema({
     mobile:{
         type:String,
-        unique:true,
-        required:true
+        // unique:true,
+        required:[true,'Mobile is required'],
+        validate: {
+        validator: function(v){
+            return this.model('User').findOne({ mobile: v }).then(user => !user)
+        },
+        message: props => `${props.value} is already used by another user`
+       },
     },
     name:{
         type:String,
-        required:true
+        required:[true,'Name is required']
     },
     email:{
         type:String,
-        required:true,
-        unique:true
+        required:[true,'Email is required'],
+        match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/, 'Invalid email format'],
+        validate: {
+        validator: function(v){
+            return this.model('User').findOne({ email: v }).then(user => !user)
+        },
+        message: props => `${props.value} is already used by another user`
+       },
+        // unique:true
     },
     password:{
-        required:true,
+        required:[true,'Password is required'],
         type:String
     }
 });

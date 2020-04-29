@@ -1,4 +1,4 @@
 module.exports={
-    mongoUrl:"mongodb+srv://satya:satya@123@cluster0-f7zye.mongodb.net/test?retryWrites=true&w=majority",
+    mongoUrl:"mongodb+srv://embteen:embteen@3211@cluster0-phs4t.mongodb.net/test?retryWrites=true&w=majority",
     jwtkey:"asdasdasd"
 }

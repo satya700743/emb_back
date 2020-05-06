@@ -40,7 +40,7 @@ app.get('/',requireToken,(req,res)=>{
     	'spousebloodgroup':req.user.spousebloodgroup,
     	'bloodgroup':req.user.bloodgroup,
     	'spouseage':req.user.spouseage,
-    	'spousename':req.user.spousebloodgroup,
+    	'spousename':req.user.spousename,
     	'lastperioddate':req.user.lastperioddate,
     	'concievedate':req.user.concievedate,
     })

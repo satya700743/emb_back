@@ -30,9 +30,24 @@ mongoose.connection.on('error',(err)=>{
 
 
 app.get('/',requireToken,(req,res)=>{
-    console.log(req.body)
-    res.send({'email':req.user.email,'name':req.user.name,'mobile':req.user.mobile})
-})
+    // console.log(req.body)
+    res.send({
+    	'email':req.user.email,
+    	'name':req.user.name,
+    	'mobile':req.user.mobile,
+    	'age':req.user.age,
+    	'gender':req.user.gender,
+    	'spousebloodgroup':req.user.spousebloodgroup,
+    	'bloodgroup':req.user.bloodgroup,
+    	'spouseage':req.user.spouseage,
+    	'spousename':req.user.spousebloodgroup,
+    	'lastperioddate':req.user.lastperioddate,
+    	'concievedate':req.user.concievedate,
+    })
+    // res.send(req.body)
+}) 
+
+
 
 app.listen(process.env.PORT || 3000, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);

@@ -34,7 +34,32 @@ const userSchema = new mongoose.Schema({
     password:{
         required:[true,'Password is required'],
         type:String
-    }
+    },
+     gender:{
+        type:String
+    },
+    age:{
+        type:String
+    },
+    bloodgroup:{
+        type:String
+    },
+    spouseage:{
+        type:String
+    },
+    spousename:{
+        type:String
+    },
+    spousebloodgroup:{
+        type:String
+    },
+    lastperioddate:{
+        type:String
+    },
+    concievedate:{
+        type:String
+    },
+
 });
 
 userSchema.pre('save',function(next){
@@ -71,5 +96,11 @@ userSchema.methods.comparePassword = function (candidatePassword){
         })
     })
 }
+
+// 04-05-2020
+userSchema.pre('updateuser',function(next){
+    const user = this;
+})
+// 
 
 mongoose.model('User',userSchema);

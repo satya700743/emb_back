@@ -32,17 +32,18 @@ mongoose.connection.on('error',(err)=>{
 app.get('/',requireToken,(req,res)=>{
     // console.log(req.body)
     res.send({
-    	'email':req.user.email,
-    	'name':req.user.name,
-    	'mobile':req.user.mobile,
-    	'age':req.user.age,
-    	'gender':req.user.gender,
-    	'spousebloodgroup':req.user.spousebloodgroup,
-    	'bloodgroup':req.user.bloodgroup,
-    	'spouseage':req.user.spouseage,
-    	'spousename':req.user.spousename,
-    	'lastperioddate':req.user.lastperioddate,
-    	'concievedate':req.user.concievedate,
+        'email':req.user.email,
+        'name':req.user.name,
+        'mobile':req.user.mobile,
+        'age':req.user.age,
+        'gender':req.user.gender,
+        'spousebloodgroup':req.user.spousebloodgroup,
+        'bloodgroup':req.user.bloodgroup,
+        'spouseage':req.user.spouseage,
+        'spousename':req.user.spousename,
+        'lastperioddate':req.user.lastperioddate,
+        'concievedate':req.user.concievedate,
+        'u_id':req.user._id
     })
     // res.send(req.body)
 }) 

@@ -2,9 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const jwt  = require('jsonwebtoken');
 const {jwtkey} = require('../keys');
+const multer = require('multer');
 const router = express.Router();
 
 const User = mongoose.model('User');
+
+const upload = multer({ 
+  dest: "upload/",
+});
+
 router.post('/signup',async(req,res)=>{
     console.log(req.body);
     const {mobile,name,email,password} =  req.body;
@@ -74,7 +80,7 @@ router.post('/updateuser',async(req,res)=>{
         spousebloodgroup:spousebloodgroup,
         lastperioddate:lastperioddate,
         concievedate:concievedate,
-        gender:gender
+        gender:gender,
       } 
     };
      const update = await User.updateOne(myquery, newvalues);
@@ -93,6 +99,36 @@ router.post('/updateuser',async(req,res)=>{
    // throw err;
    console.log({"err":err})
    console.log({"res":res})
+  });
+
+  // router.post('/updateImageprofile',async(req,res)=>{
+  // console.log("body =>", req.body);
+  // console.log('files => ', req.files);
+  // console.log("file =>", req.file);
+  // });
+
+  router.post("/updateImageprofile", upload.single('file'), async (req, res,next) => {
+
+  console.log("body =>", req.body);
+  console.log('files => ', req.files);
+  console.log("file =>", req.file);
+  console.log("id =>", req.ids);
+  // console.log(res);
+
+
+  // const oldpath = req.body.;
+  // const newpath = '/Users/mperrin/test/test-native/test-upload-photo/server/lol.jpg';
+
+  // fs.rename(oldpath, newpath, (err) => {
+  //   if (err) {
+  //     throw err;
+  //   }
+
+  //   res.write('File uploaded and moved!');
+  //   res.sendStatus(200);
+  // });
+
+    res.sendStatus(200);
   });
 // // update users 04-05-2020 end
 

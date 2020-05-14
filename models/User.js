@@ -59,6 +59,9 @@ const userSchema = new mongoose.Schema({
     concievedate:{
         type:String
     },
+    photoId:{
+        type:String
+    }
 
 });
 

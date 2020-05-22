@@ -7,8 +7,9 @@ const router = express.Router();
 const GridFsStorage = require('multer-gridfs-storage');
 const url = 'mongodb://localhost:27017/embteen';
 const storage = new GridFsStorage({ url });
-
+const uploadController = require("../controllers/upload");
 const User = mongoose.model('User');
+// const uploads = require("../middleware/upload");
 
 
 const upload = multer({ 
@@ -111,30 +112,42 @@ router.post('/updateuser',async(req,res)=>{
   // console.log("file =>", req.file);
   // });
 
-  router.post("/updateImageprofile", upload.any(['file', 'ids']), async (req, res,next) => {
+  // router.post("/updateImageprofile", uploadController.uploadFile);
 
-  console.log("body =>", req.body);
-  console.log('files => ', req.files);
-  console.log("file =>", req.file);
-  console.log("id =>", req.ids);
-  console.log('I am in');
-  // console.log(res);
-
-
-  // const oldpath = req.body.;
-  // const newpath = '/Users/mperrin/test/test-native/test-upload-photo/server/lol.jpg';
-
-  // fs.rename(oldpath, newpath, (err) => {
-  //   if (err) {
-  //     throw err;
-  //   }
-
-  //   res.write('File uploaded and moved!');
-  //   res.sendStatus(200);
-  // });
-
-    res.sendStatus(200);
+  router.post("/updateImageprofile",upload.single('file'), async (req, res,next) => {
+    console.log('file',req.file)
+    console.log("I am in");
+     var myquery = { _id: req.file.originalname };
+      var newvalues = { $set: 
+          {
+            photoId : req.file.filename
+          } 
+        };
+     const update = await User.updateOne(myquery, newvalues);
+     if (update)
+    {
+    return res.send({'msg':'Profile have been updated','result':true})
+    }else
+    {
+      return res.status(400).send({
+      msg: 'This is an error!',
+      'result':false
+      });
+    }
   });
+
+  router.post("/updateImageprofile2", upload.array('photo',3),async (req, res,next) => {
+
+    console.log("I am in");
+    console.log('files', req.files)
+     console.log('file', req.file)
+    console.log('body', req.body)
+    res.status(200).json({
+      message: 'success!',
+    })
+  });
+  
+
 // // update users 04-05-2020 end
 
 module.exports = router

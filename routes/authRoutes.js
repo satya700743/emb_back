@@ -116,6 +116,7 @@ router.post('/updateuser',async(req,res)=>{
 
   router.post("/updateImageprofile",upload.single('file'), async (req, res,next) => {
     console.log('file',req.file)
+    console.log("I am in");
      var myquery = { _id: req.file.originalname };
       var newvalues = { $set: 
           {
@@ -134,6 +135,19 @@ router.post('/updateuser',async(req,res)=>{
       });
     }
   });
+
+  router.post("/updateImageprofile2", upload.single('photo'), (req, res,next) => {
+
+    console.log("I am in");
+    console.log('files', req.files)
+     console.log('file', req.file)
+    console.log('body', req.body)
+    res.status(200).json({
+      message: 'success!',
+    })
+  });
+  
+
 // // update users 04-05-2020 end
 
 module.exports = router
